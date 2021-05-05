@@ -1,0 +1,32 @@
+name: CI
+
+on:
+
+  push:
+    branches: [ main ]
+
+  workflow_dispatch:
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: ListePré
+        run: ls
+        
+      - uses: actions/checkout@v2
+      
+      - name: ListePost
+        run: ls
+      
+      - name: build
+        run: |
+          docker build Dockerfile --tag ImageAction 
+          docker commit ImageAction
+        
+      - name: Push_DockerHub
+        run: docker push hello-docker-actions / ImageAction
+        
+
+
