@@ -1,0 +1,24 @@
+name: Docker build image 
+
+on:
+  push:
+    branches: [ main ]
+
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    
+    runs-on: ubuntu-latest
+    
+    steps: 
+      - name: list
+        run: ls
+      - uses: actions/checkout@v2
+      - name: list
+        run: ls
+      - name: Build the Docker image
+        run: Docker build --file Dockerfile --tag my-image-name:$(date +%s)
+        
